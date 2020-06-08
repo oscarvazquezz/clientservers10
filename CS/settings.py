@@ -25,7 +25,7 @@ SECRET_KEY = '0_57k=0e!snl$!$vdjs-gc69oeqx((_2ffj6(!5x*!-jxt*^bp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['clientservers10.herokuapp.com']
 
 
 # Application definition
