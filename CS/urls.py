@@ -18,6 +18,8 @@ from django.urls import path,re_path
 from django.conf.urls import include
 from rest_framework import routers,serializers,viewsets
 from django.contrib.auth.models import User
+from django.conf.urls import url
+from rest_framework_swagger.views import get_swagger_view
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -31,7 +33,10 @@ class UserViewSet(viewsets.ModelViewSet):
 router = routers.DefaultRouter()
 router.register(r'users',UserViewSet)
 
+schema_view = get_swagger_view(title='Pastebin API')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url('Api/',schema_view),
     re_path(r'^',include(router.urls))
 ]
