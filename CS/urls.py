@@ -41,5 +41,6 @@ urlpatterns = [
     re_path(r'^',include(router.urls)),
     re_path(r'^Api/V1/Login',include('Login.urls')),
     re_path(r'^Api/V1/Example1',include('Example1.urls')),
+    re_path(r'^Api/V1/Example2',include('Example2.urls')),
     url('Api/',schema_view),
 ]
