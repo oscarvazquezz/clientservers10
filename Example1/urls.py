@@ -6,4 +6,5 @@ from Example1 import views
 
 urlpatterns = [
     re_path(r'/Example1/$',views.EjemploLista.as_view()),
+    re_path(r'/Example1_detalle/(?P<id>\d+)/$', views.EjemploDetalle.as_view()),
 ]

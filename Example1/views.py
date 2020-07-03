@@ -12,7 +12,7 @@ from Example1.serializer import Ejemplo1Serializers
 
 class EjemploLista(APIView):
     def get(self,request,format=None):
-        print("hola get")
+        print("get")
         queryset = Example1.objects.all()
         serializer = Ejemplo1Serializers(queryset,many = True)
         return Response(serializer.data)
@@ -24,3 +24,31 @@ class EjemploLista(APIView):
             serializer.save()
             datas = serializer.data
             return Response(datas)
+
+class EjemploDetalle(APIView):
+    def get_object(self,id):
+        try:
+            return Example1.objects.get(pk=id)
+        except Example1.DoesNotExist:
+            return 404
+
+    def get(self,request,id,format=None):
+        print("get detalle")
+        ejemplo = self.get_object(id)
+        if ejemplo == 404:
+            return Response("lo siento no hay dato")
+        else:
+            serializer = Ejemplo1Serializers(ejemplo)
+            return Response(serializer.data)
+        
+    def put(self,request,id,format=None):
+        print("put detalle")
+        idEjemplo = self.get_object(id)
+        if idEjemplo == 404:
+            return Response("lo siento no hay dato")
+        else:
+            serializer = Ejemplo1Serializers(idEjemplo,data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                datos = serializer.data
+                return Response(datos)
