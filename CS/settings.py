@@ -14,19 +14,19 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+from decouple import config
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY ='SECRET_KEY'
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
+SECRET_KEY =config('SECRET_KEY')
+DEBUG  = config('DEBUG',cast=bool)
+EMAIL_HOST = config('EMAIL_HOST ',default='localhost')
+EMAIL_PORT = config('EMAIL_PORT ',default=25,cast=int)
 ALLOWED_HOSTS = ['clientservers10.herokuapp.com']
-
+#DEBUG = False
 
 # Application definition
 
@@ -100,11 +100,11 @@ WSGI_APPLICATION = 'CS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd7l6rsom2h5td9',
-        'USER' : 'ujoyldvwcrwloh',
-        'PASSWORD' : 'c5876436bd932d850bba92e970928283501cd57856c727bfc8b86aae3776c9c1',
-        'HOST': 'ec2-35-172-85-250.compute-1.amazonaws.com',
-        'PORT': '5432'
+        'NAME': config('DB_NAME'),
+        'USER' : config('DB_USER'),
+        'PASSWORD' : config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
     }
 }
 
