@@ -24,6 +24,8 @@ class EjemploLista(APIView):
             serializer.save()
             datas = serializer.data
             return Response(datas)
+        else:
+            return Response(serializer.errors)
 
 class EjemploDetalle(APIView):
     def get_object(self,id):
@@ -52,3 +54,5 @@ class EjemploDetalle(APIView):
                 serializer.save()
                 datos = serializer.data
                 return Response(datos)
+            else:
+                return Response(serializer.errors)
